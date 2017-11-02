@@ -1,0 +1,5 @@
+name: Custom Modal
+description: Display a Modal
+type: module
+core: 8.x
+package: Custom
