@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function resume_schema() {
+   $schema['candidate_resume'] = array(
+    'description' => 'The base table for candidate resume.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'size' => 'big',
+      ),
+       'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+       'candidate_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+       'candidate_email' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+       'candidate_phone' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+       'candidate_dob' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+       'candidate_gender' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+       'candidate_confirmation' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+       'candidate_copy' => array(
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+        'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}
