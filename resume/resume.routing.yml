@@ -1,0 +1,14 @@
+resume.form:
+  path: '/resume/myform'
+  defaults:
+    _title: Resume Form
+    _form: '\Drupal\resume\Form\ResumeForm'
+  requirements:
+    _permission: 'access content'
+resume.display_table_controller_display:
+  path: '/resume/list'
+  defaults:
+    _controller: '\Drupal\resume\Controller\DisplayTableController::display'
+    _title: 'Resume List'
+  requirements:
+    _permission: 'access content'

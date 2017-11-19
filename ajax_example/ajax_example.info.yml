@@ -1,0 +1,5 @@
+name: Ajax Form D8
+description: Example how to use ajax in D8 Form.
+core: 8.x
+type: module
+package: Custom
