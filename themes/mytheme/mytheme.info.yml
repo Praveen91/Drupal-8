@@ -1,0 +1,16 @@
+name: My Theme
+description: My Custom Theme.
+type: theme
+core: 8.x
+base theme: classy
+
+libraries:
+  - mytheme/global-styling
+
+regions:
+  header: 'Header'
+  primery_menu: 'Primery menu'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  breadcrumb: 'Breadcrumb'
+  content: 'Content'
