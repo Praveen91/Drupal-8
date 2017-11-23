@@ -1,0 +1,5 @@
+name: My Data Drupal
+description: Custom form for D8 eith CRUD.
+core: 8.x
+type: module
+package: Custom
