@@ -1,0 +1,5 @@
+name: Cusotm table format
+description: Cusotm table format for diplay user data.
+core: 8.x
+type: module
+package: Cusotm
