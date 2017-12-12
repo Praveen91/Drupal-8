@@ -1,0 +1,4 @@
+name: Slick Slideshows
+description: Slideshows using slick plugin.
+core: 8.x
+type: module

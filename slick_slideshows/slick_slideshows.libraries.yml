@@ -1,0 +1,12 @@
+slick:
+  css:
+    theme:
+      slick/slick.css: {}
+      slick/slick-theme.css: {}
+      css/slick-custom.css: {}
+
+  js:
+    slick/slick.min.js: {}
+    js/custom.js: {}
+  dependencies:
+    - core/jquery  
