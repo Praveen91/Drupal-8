@@ -1,0 +1,7 @@
+custom_table.display:
+  path: '/table/display/user'
+  defaults:
+    _title: 'Custom user table'
+    _controller: 'Drupal\custom_table\Controller\DisplayUserData::tableuser'
+  requirements:
+    _permission: 'access content'
