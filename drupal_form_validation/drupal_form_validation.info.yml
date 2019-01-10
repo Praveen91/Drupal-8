@@ -1,0 +1,4 @@
+name: Drupal Form Validation
+description: Implementing an example of form validation.
+core: 8.x
+type: module
