@@ -1,0 +1,121 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function form_theming_menu() {
+
+  $items['telstra-iot'] = array(
+    'title' => 'Teltra multiform on single page',
+    'page callback' => 'telstra_checkout_page',
+    //'page arguments' => array(),
+    //'access arguments' => array(''),
+    'access callback' => TRUE,
+  );
+
+  return $items;
+}
+
+// Callback page
+// First form.
+
+function telstra_form_one($form, &$form_state) {
+   $form = [];
+   $form['login_email'] = [
+     '#title' => t('Registered Email'),
+     '#type' => 'textfield',
+     '#required' => TRUE,
+   ];
+   $form['login_password'] = [
+      '#type' => 'password',
+      '#required' => FALSE,
+      '#title' => t('Password'),
+   ];
+   $form['login_submit'] = [
+      '#type' => 'submit',
+      '#id' => 'drupal_login',
+      '#value' => t('Login'),
+   ];
+  return $form;
+}
+
+
+// Second form.
+function telstra_form_two($form, &$form_state) {
+$form['registered_email'] = array(
+'#type' => 'textfield',
+'#required' => TRUE,
+'#title' => t('Registered Email'),
+);
+$form['create_password'] = array(
+'#type' => 'password',
+'#required' => FALSE,
+'#title' => t('Password'),
+);
+$form['confirm_password'] = array(
+'#type' => 'password',
+'#required' => FALSE,
+'#title' => t('Confirm Password'),
+);
+$form['submit'] = array(
+'#type' => 'submit',
+'#id' => 'drupal_signup',
+'#value' => t('Create Password'),
+);
+return $form;
+}
+
+
+
+//Link your both forms into theme() function.  You can also pass form elements if its necessary.
+
+function telstra_checkout_page() {
+
+ $telstra_form_one = drupal_get_form('telstra_form_one');
+ $telstra_form_two = drupal_get_form('telstra_form_two');
+
+ $combine_form = array(
+  'arg1' => $telstra_form_one,
+  'arg2' => $telstra_form_two
+  );
+ $output = theme('telstra_checkout_page', $combine_form);
+ return $output;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function form_theming_theme($existing, $type, $theme, $path) {
+
+  $items['telstra_form_one'] = array(
+ 'render element' => 'form',
+ 'template' => 'telstra_form_one',
+ 'path' => drupal_get_path('module', 'form_theming') .'/templates', );
+
+  $items['telstra_form_two'] = array(
+ 'render element' => 'form',
+ 'template' => 'telstra_form_two',
+ 'path' => drupal_get_path('module', 'form_theming') .'/templates', );
+
+  $items['telstra_checkout_page'] = array(
+ 'template' => 'telstra_checkout_page',
+ 'path' => drupal_get_path('module', 'form_theming') .'/templates',
+ 'arguments' => array('combine_form' => NULL), );
+
+ return $items;
+
+}
+
+
+/**
+ * Implements Template Preprocessor For Login and Update User().
+ */
+function template_preprocess_telstra_checkout_page(&$variables) {
+  $variables['telstra_form_one'] = drupal_render($variables['arg1']);
+  $variables['telstra_form_two'] = drupal_render($variables['arg2']);
+}
+//Example 1
+/*function template_preprocess_custom_drupal_update_form(&$variables) {
+//dpm($variables);
+  //$variables['registered_email'] = drupal_render($variables['form']['registered_email']);
+}*/

@@ -13,7 +13,7 @@ use Drupal\Core\Template\Attribute;
 function drupal_up_preprocess_node(&$variables) {
   $variables['question_wrapper']['attributes'] = new Attribute([
     'id' => 'wrapper-' . $variables['node']->id(),
-    'data-js-name' => 'random',
+    'data-js-name' => 'wraaper-' . $variables['node']->title,
     'class' => [
       'class-pp-1',
       'class-pp-2',
