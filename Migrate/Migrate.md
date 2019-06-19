@@ -9,13 +9,13 @@ Step 2. Prepare the CSV file contains the User's data.
 
 Here our CSV is...
 
-<script src="https://gist.github.com/Praveen91/e0138a9802b9b6578c146648ede4c42c.js"></script>
+https://gist.github.com/Praveen91/e0138a9802b9b6578c146648ede4c42c
 
 Step 3. Create the Migrate configuration file and import the configuration
 
 Create the migrate configuration files as like the following,
 
-<script src="https://gist.github.com/Praveen91/8f5aac64e1b9bba24c8afb99d5f839fb.js"></script>
+https://gist.github.com/Praveen91/8f5aac64e1b9bba24c8afb99d5f839fb
 
 In migration, There are three things are the very important source, process, and destination.
 
