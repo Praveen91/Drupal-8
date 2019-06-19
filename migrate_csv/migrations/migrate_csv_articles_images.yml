@@ -1,0 +1,50 @@
+dependencies:
+  module:
+    - file
+id: migrate_csv_articles_images
+label: 'Migrate Images for the articles from the csv file'
+migration_group: null
+source:
+  constants:
+      source_base_path: 'modules/custom/migrate_csv/assets/pictures'
+      uri_file: 'public://images/pictures/'
+  plugin: csv
+  track_changes: true
+  # Full path to the file.
+  path: 'modules/custom/migrate_csv/assets/csv/articles.csv'
+  header_row_count: 1
+  keys:
+    - name
+  column_names:
+    3:
+      name: Picture
+process:
+  source_full_path:
+    -
+      plugin: concat
+      delimiter: /
+      source:
+        - constants/source_base_path
+        - name
+    -
+      plugin: urlencode
+  uri_file:
+    -
+      plugin: concat
+      delimiter: /
+      source:
+        - constants/uri_file
+        - name
+    -
+      plugin: urlencode
+  filename: name
+  uri:
+    plugin: file_copy
+    source:
+      - '@source_full_path'
+      - '@uri_file'
+destination:
+  plugin: 'entity:file'
+migration_dependencies:
+  required: {  }
+  optional: {  }
