@@ -1,0 +1,13 @@
+id: migrate_csv_tags
+label: 'Migrate Tags from the csv file'
+source:
+  plugin: csv
+  path: 'modules/custom/migrate_csv/assets/csv/tags.csv'
+  header_row_count: 1
+  keys:
+    - Title
+process:
+  name: Title
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: tags

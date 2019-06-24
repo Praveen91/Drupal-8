@@ -1,0 +1,39 @@
+id: migrate_csv_articles
+label: 'Migrate articles from the csv file'
+source:
+  plugin: csv
+  # Full path to the file.
+  path: 'modules/custom/migrate_csv/assets/csv/articles.csv'
+  delimiter: ','
+  enclosure: '"'
+  header_row_count: 1
+  keys:
+    - ID
+process:
+  # Adding the mapping between the fields and the csv columns.
+  title: Title
+  body: Body
+  type:
+    plugin: default_value
+    default_value: article
+  field_tags:
+    -
+      plugin: explode
+      delimiter: ', '
+      source: Tags
+    -
+      plugin: migration
+      migration: migrate_csv_tags
+  'field_image/target_id':
+    plugin: migration
+    migration: migrate_csv_articles_images
+    source: Picture
+  uid:
+    -
+      plugin: author_id
+      source: Author
+destination:
+  plugin: entity:node
+migration_dependencies:
+  optional:
+      - migrate_csv_articles_images

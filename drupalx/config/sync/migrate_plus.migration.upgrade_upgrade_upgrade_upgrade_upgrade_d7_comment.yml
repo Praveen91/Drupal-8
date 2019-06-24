@@ -1,0 +1,116 @@
+uuid: 5e7fc753-8bc8-4c41-889f-222f35052e31
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_upgrade_upgrade_upgrade_upgrade_d7_comment
+class: Drupal\comment\Plugin\migrate\D7Comment
+field_plugin_method: alterFieldMigration
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: Comments
+source:
+  key: upgrade
+  plugin: d7_comment
+  constants:
+    entity_type: node
+process:
+  cid:
+    -
+      plugin: get
+      source: cid
+  pid:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: pid
+    -
+      plugin: migration_lookup
+      migration: upgrade_upgrade_upgrade_upgrade_upgrade_d7_comment
+  entity_id:
+    -
+      plugin: migration_lookup
+      migration: {  }
+      source: nid
+    -
+      plugin: skip_on_empty
+      method: row
+  entity_type:
+    -
+      plugin: get
+      source: constants/entity_type
+  comment_type:
+    -
+      plugin: migration_lookup
+      source: node_type
+      migration: upgrade_upgrade_upgrade_upgrade_upgrade_d7_comment_type
+    -
+      plugin: skip_on_empty
+      method: row
+  langcode:
+    -
+      plugin: get
+      source: language
+  field_name:
+    -
+      plugin: get
+      source: '@comment_type'
+  subject:
+    -
+      plugin: get
+      source: subject
+  uid:
+    -
+      plugin: get
+      source: uid
+  name:
+    -
+      plugin: get
+      source: name
+  mail:
+    -
+      plugin: get
+      source: mail
+  homepage:
+    -
+      plugin: get
+      source: homepage
+  hostname:
+    -
+      plugin: get
+      source: hostname
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  status:
+    -
+      plugin: get
+      source: status
+  thread:
+    -
+      plugin: get
+      source: thread
+  comment_body:
+    -
+      plugin: get
+      source: comment_body
+  type:
+    -
+      map:
+        d7_text:
+          d7_text: d7_text
+destination:
+  plugin: 'entity:comment'
+migration_dependencies:
+  required:
+    - upgrade_upgrade_upgrade_upgrade_upgrade_d7_comment_type
+  optional:
+    - upgrade_upgrade_upgrade_upgrade_upgrade_d7_comment
+    - upgrade_upgrade_upgrade_upgrade_upgrade_d7_comment_type

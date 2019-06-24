@@ -1,0 +1,31 @@
+uuid: 53ce0b2c-817c-480b-be6f-350c8c4cc4b2
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_upgrade_upgrade_upgrade_upgrade_upgrade_upgrade_system_maintenance
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 6'
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Maintenance page configuration'
+source:
+  key: upgrade
+  plugin: variable
+  variables:
+    - site_offline_message
+  source_module: system
+process:
+  message:
+    -
+      plugin: get
+      source: site_offline_message
+destination:
+  plugin: config
+  config_name: system.maintenance
+migration_dependencies:
+  required: {  }
+  optional: {  }

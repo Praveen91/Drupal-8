@@ -1,0 +1,30 @@
+uuid: cb3f9fa7-3883-4cc1-9d7f-4bf3d8cdf0c3
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_upgrade_upgrade_upgrade_upgrade_upgrade_d7_dblog_settings
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Database logging configuration'
+source:
+  key: upgrade
+  plugin: variable
+  variables:
+    - dblog_row_limit
+  source_module: dblog
+process:
+  row_limit:
+    -
+      plugin: get
+      source: dblog_row_limit
+destination:
+  plugin: config
+  config_name: dblog.settings
+migration_dependencies:
+  required: {  }
+  optional: {  }

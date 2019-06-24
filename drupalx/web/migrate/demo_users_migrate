@@ -1,0 +1,22 @@
+id: demo_user_migration
+migration_tags: null
+migration_group: null
+label: 'User migration from CSV'
+source:
+  plugin: csv
+  path: /Users/praveen.kumar/Sites/demousers_migrate.csv
+  header_row_count: 1
+  keys:
+    - ID
+process:
+  name: name
+  mail: email
+  roles: roles
+  field_last_name: firstname
+  field_first_name: lastname
+  status: Status
+destination:
+  plugin: 'entity:user'
+migration_dependencies:
+  required: {  }
+optional: {  }

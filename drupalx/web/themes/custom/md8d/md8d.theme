@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the md8d theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for page document templates.
+ */
+
+function md8d_preprocess_page(&$variables) {
+	//echo "string";
+	//kint($variables); die();
+	// Add specail styling to the front page
+	if ($variables['is_front']) {
+		$variables['#attached']['library'][] = 'md8d/fornt-page';
+	}
+
+//print_r($variables);
+}

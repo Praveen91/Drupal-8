@@ -1,0 +1,4 @@
+ID,name,email,firstname,lastname,Status,roles,Password
+1,rakesh,rakesh.james@gmail.com,Rakesh,James,1,"administrator,migrationuser",rakesh@123
+2,james,james.rakesh@gmail.com,James,Rakesh,1,authenticated,james@123
+3,dummy,dummy@gmail.com,Dummy,User,1,"migrationuser,administrator",dummy@123
