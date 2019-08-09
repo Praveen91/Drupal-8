@@ -1,0 +1,5 @@
+name: My data
+description: How To Create a Custom form with CRUD Operations.
+core: 8.x
+type: module
+package: Custom
