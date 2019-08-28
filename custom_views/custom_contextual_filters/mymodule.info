@@ -1,0 +1,4 @@
+name = Custom Contextual Filters
+description = Added a custom Contextual Filters for a view
+core = 7.x
+package = Custom

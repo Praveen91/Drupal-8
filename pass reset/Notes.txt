@@ -1,0 +1,6 @@
+Execute the script, by requesting the file in a web browser using the following URL pattern:
+http://example.com/pass_reset.php?pass=mypassword
+In the above URL,
+- replace example.com with your actual domain name,
+- replace pass_reset.php with the actual file name that you specified in step one above,
+- replace mypassword with the desired new password.
