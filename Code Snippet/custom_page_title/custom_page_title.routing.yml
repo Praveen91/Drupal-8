@@ -1,0 +1,8 @@
+custom_page_title.title_callback_page:
+  path: 'custom/title'
+  defaults: 
+    _controller: '\Drupal\custom_page_title\Controller\CustomTitleController::dummy_page'
+    _title_callback: '\Drupal\custom_page_title\Controller\CustomTitleController::titleCallback'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'

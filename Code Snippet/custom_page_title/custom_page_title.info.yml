@@ -1,0 +1,4 @@
+name: Custom page title
+description: Random page title for custom page
+core: 8.x
+type: module
