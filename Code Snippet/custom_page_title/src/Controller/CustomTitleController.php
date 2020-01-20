@@ -75,11 +75,11 @@ class CustomTitleController {
 		//drush cget system.site uuid
         //drush cset system.site uuid -- id --
 
-/*      Show Erros on Developing or WSOD(White Screen Of Death) 
+      Show Erros on Developing or WSOD(White Screen Of Death) 
         we need to add below lines in "settings.php".
         error_reporting(E_ALL);
 		ini_set('display_errors', TRUE);
-		ini_set('display_startup_errors', TRUE);*/
+		ini_set('display_startup_errors', TRUE);
 
 
 		//Drupal Inline Entity Form Module hook_form_alter()
@@ -92,7 +92,7 @@ class CustomTitleController {
 
 		//MERGE(INSERT+UPDATE) query
 
-/*		$empId = 'CE 003';
+		$empId = 'CE 003';
 		$empName = 'Kumar';
 		$empAge = 25;
 		 
@@ -107,37 +107,37 @@ class CustomTitleController {
 				'employee_name' => $empName,
 				'employee_age' => $empAge,
 			))->execute();
-*/
+
 
         //DELETE query
-		/*$query = \Drupal::database()->delete('employee', 'emp');
+		$query = \Drupal::database()->delete('employee', 'emp');
 	            ->condition('employee_id', 'CE 003')
-	            ->execute();*/
+	            ->execute();
 
 	    //UPDATE query
-	     /* \Drupal::database()->update('employee')
+	      \Drupal::database()->update('employee')
 			->condition('employee_id' , 'CE 003')
 			->updateFields([
 				'employee_name' => 'Swathy',
 				'employee_age' => 20,
 			])
-			->execute();*/
+			->execute();
 
          //SELECT query
 
-		/*	$query = \Drupal::database()->select('employee', 'emp');
+			$query = \Drupal::database()->select('employee', 'emp');
 			$query->fields('emp', ['employee_id', 'employee_name', 'employee_age']);
 			$result = $query->execute();
 			while ($row = $result->fetchAssoc()) {
 				$output .= $row['employee_id'];
 				$output .= $row['employee_name'];
 				$output .= $row['employee_age'];
-			}*/
+			}
 
 		//INSERT query
 
 		// Insert the record to table.
-		/*\Drupal::database()->insert('employee')
+		\Drupal::database()->insert('employee')
 			->fields([
 				'employee_id',
 				'employee_name',
@@ -148,10 +148,10 @@ class CustomTitleController {
 				'Kumar',
 				25,
 			))
-			->execute();*/
+			->execute();
 
 		//List of Taxonomy Vocabularies.
-/*
+
 		use Drupal\taxonomy\Entity\Vocabulary;
 		--------------
 		--------------
@@ -162,10 +162,10 @@ class CustomTitleController {
 		}
 		print_r($vocabulariesList);
 
-*/
+
 
      //List of Content type
-/*
+
 		// Loading list Content types storage information.
 		$contentTypes = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
 		$contentTypesList = [];
@@ -181,10 +181,10 @@ class CustomTitleController {
 		);
 
 
-*/
+
 
        //Programmatically create File in server
-	/*	
+		
 		$uri = 'public://myprofile.pdf';
 		$wrapperObj = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
 		$filePath = $wrapperObj->realpath();
@@ -203,17 +203,17 @@ class CustomTitleController {
 		else {
 		  print "Error in file creation";
 		}
-*/
+
 
 
 		//Get file Real / Absolute path from URI
-/*
+
 		$uri = 'public://myprofile.pdf';
 		$wrapperObj = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
 		$filePath = $wrapperObj->realpath();
 		print_r(filePath);
 
-*/
+
 
         //Directory/Folder creation with permissions.
 		//drupal_mkdir(“public://codeexpertz”, “777”);
@@ -221,7 +221,7 @@ class CustomTitleController {
 		//Programmatically sent Mail.
 
 
-		/*// Call below code in your function.
+		// Call below code in your function.
 		$sentMail = \Drupal::service('plugin.manager.mail')->mail(MODULE_NAME, UNIQUE_KEY, TO_MAIL, LANGUAGE, PARAMETERS, REPLY, SEND);
 		// Parameters
 		MODULE_NAME - Module that send mail.
@@ -239,10 +239,10 @@ class CustomTitleController {
 		$message['body'][] = PARAMETER_BODY;
 		}
 		}
-		FROM - From Mail Id for the mail. */
+		FROM - From Mail Id for the mail. 
 
 		// exmple
-/*
+
 		function faq_ask_node_update($node) {
 		  // Get the asker account.
 		  $email = 'test@example.com';
@@ -259,56 +259,56 @@ class CustomTitleController {
 		  else {
 		   print "There is error in sending mail.";
 		  }
-		}*/
+		}
 		 
 		/**
 		 * Implements hook_mail().
 		 *
 		 * This function completes the email, allowing for placeholder substitution.
 		 */
-/*		function faq_ask_mail($key, &$message, $params) {
+		function faq_ask_mail($key, &$message, $params) {
 		  if (($key == 'notify_asker') || ($key == 'notify_expert')) {
 		    $message['from'] = 'info.codeexpertz@gmail.com';
 		    $message['body'] = "This is Sample mail content for testing purpose from CodeExpertz";
 		    $message['subject'] = "Test Mail from CodeExpertz";
 		  }
 		}
-*/
+
 
 		//Alter system path with custom Paths.
-/*
+
 		function codeexpertz_menu_alter(&$items) {
 		 $items['node/add/article'] = $items['create/article'];
 		 unset($items['node/add/article']);
 		}
-*/
+
 
 		// add Custom validtion function using form alter.
 
 
-		//use Drupal\Core\Form\FormStateInterface;
+		use Drupal\Core\Form\FormStateInterface;
 
 			/**
 			 * Implements hook_form_FORM_ID_alter().
 			 */
-		/*	function faq_ask_form_node_faq_form_alter(&$form, FormStateInterface $form_state) {
+			function faq_ask_form_node_faq_form_alter(&$form, FormStateInterface $form_state) {
 			  // Custom validate function.
 			  $form['#validate'][] = 'faq_ask_form_validate';
 			}
-			 */
+			 
 			/**
 			 * Validation form for the FAQ Ask form.
 			 *
 			 * Verifies that the e-mail entered seems to be a valid e-mail.
 			 */
-		/*	function faq_ask_form_validate($form, FormStateInterface &$form_state) {
+			function faq_ask_form_validate($form, FormStateInterface &$form_state) {
 			  $email = $form_state->getValue('faq_email');
 			  if (isset($email) && 2 < strlen($email)) {
 			    if (!valid_email_address($email)) {
 			      $form_state->setErrorByName('email', t('That is not a valid e-mail address.'));
 			    }
 			  }
-			}*/
+			}
 
 
 
