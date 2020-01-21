@@ -18,6 +18,12 @@ class CustomTitleController {
 		$nodeObj = entity_load('node', 4);
         $bundle = $nodeObj->bundle();
 
+        return [
+           '#type' => 'markup',
+           '#markup' => 'Hello from our custom title controller form '. $bundle,
+		];
+
+
         //The below code will return all the available user roles as an array in drupal 8.
         $roles = array_map(['\Drupal\Component\Utility\Html', 'escape'], user_role_names(TRUE));
 
@@ -311,12 +317,207 @@ class CustomTitleController {
 			}
 
 
+			// adding validate and submit custom handler for custom form.
+
+			use Drupal\Core\Form\FormStateInterface;
+
+			/**
+			 * Implements hook_form_FORM_ID_alter().
+			 */
+			function faq_ask_form_node_faq_form_alter(&$form, FormStateInterface $form_state) {
+			  // Custom validate function.
+			  $form['#validate'][] = 'faq_ask_form_validate';
+			   // Custom Submit function.
+			  $form['actions']['submit']['#submit'][] = 'faq_ask_submit';
+			}
+			 
+			/**
+			 * Validation form for the FAQ Ask form.
+			 *
+			 * Verifies that the e-mail entered seems to be a valid e-mail.
+			 */
+			function faq_ask_form_validate($form, FormStateInterface &$form_state) {
+			  $email = $form_state->getValue('faq_email');
+			  if (isset($email) && 2 < strlen($email)) {
+			    if (!valid_email_address($email)) {
+			      $form_state->setErrorByName('email', t('That is not a valid e-mail address.'));
+			    }
+			  }
+			}
+			 
+			/**
+			 * Handles the ask form submission.
+			 */
+			function faq_ask_submit($form, FormStateInterface $form_state) {
+			  $user = \Drupal::currentUser();
+			  if ($user->hasPermission('ask question') && !$user->hasPermission('answer question')) {
+			    $node_id = $form_state->getValue('nid');
+			    $node = node_load($node_id);
+			    if (is_object($node)) {
+			      $node->status->value = 0;
+			      $node->save();
+			    }
+			  }
+			}
 
 
-		return [
-           '#type' => 'markup',
-           '#markup' => 'Hello from our custom title controller form '. $bundle,
-		];
+			// Form Redirect in hook_form_alter()
+
+			function hook_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+			  $form_state->setRedirect(REDIRECT_URL);
+			}
+
+			//Encrypting String with Site Private Key.
+
+			/*In Drupal 7 to encrypt the string we use the core function “drupal_hash_base64()”. This function have 2 parameters, Encrypting string and optional parameter of Site private key. But this function is deprecated in Drupal 8.   
+
+		    In Drupal 8 we need to use the class Crypt from component utility for encryption. Similarly it have 2 parameters.*/
+
+		    // Private Key.
+			$privateKey = \Drupal::service('private_key')->get();
+			print $privateKey;
+			//Output
+			GROlAqWtZ98EcKWRGMHalv6ynSvb0jqd5aOqJCOP_Uz8Vy8BBPY1PfzLXOpvlr3YScZgP6DFeQ
+			 
+			// Encryption of String with private key from site.
+			$encrptionPrivate = Crypt::hmacBase64(‘codeexpertz’, \Drupal::service('private_key')->get());
+			print $encrptionPrivate;
+			//Output
+			me6_sWh86-TqaKORnn9fMSETxJ0iWECWUO22hFbvZ_k
+
+
+			//Loading User Roles and Check Role has Permission.
+
+			//Loading Single and Multiple Roles:
+
+				// Loading Single Role
+			$role = \Drupal\user\Entity\Role::load(‘ROLE_ID’);
+			print_r($role); // Return Specified Role as Object.
+			// List out all roles from System.
+			$roles = \Drupal\user\Entity\Role::loadMultiple();
+			print_r($roles); // Return Roles as Object.
+
+
+			// Loading administrator role.
+			$roleObj =  \Drupal\user\Entity\Role::load('administrator');
+			print_r($roleOb);
+			 
+			// List out all roles.
+			$roles =  \Drupal\user\Entity\Role::loadMultiple();
+			foreach ($roles as $role => $rolesObj) {
+				$role_list[$role] = $rolesObj->get('label');
+			}
+			print_r($role_list);
+			// Output
+			Array
+			(
+			    [anonymous] => Anonymous user
+			    [authenticated] => Authenticated user
+			    [administrator] => Administrator
+			)
+
+
+			//Check Role have Permission:
+
+			//Syntax:
+
+			$roleObj = \Drupal\user\Entity\Role::load(‘ROLE_ID’);
+			if ($roleObj->hasPermission("PERMISSION NAME")) {
+			   // Role Has Permission.
+			}
+			else {
+			   // Role Won't have permission.
+			}
+			
+			//Example:
+
+			// Get All users having the role of answer.
+			$roles = \Drupal\user\Entity\Role::loadMultiple();
+			foreach ($roles as $role => $roleObj) {
+			  if ($roleObj->hasPermission("answer question")) {
+				$role_list[$role] = $roleObj->get('label');
+			  }
+			}
+			print_r($role_list); // List Roles have permission of 'answer question'.
+
+			//Check Module Exist or Not.
+
+			/*In Drupal 7 there function called module_exist(). This function returns true if module exist else return false. For Drupal 8 module_exist() function is Deprecated.
+
+			In Drupal there is Core function moduleHandler() will more information about modules in Drupal system. The moduleHandler() returns a object, using this object we can call moduleExists() function with module name as parameter to the function.*/
+
+
+			//Syntax:
+
+			\Drupal::moduleHandler()->moduleExists(‘MODULE NAME’);
+			//Example:
+
+			$moduleHandler = \Drupal::moduleHandler();
+			$moduleExist = $moduleHandler->moduleExists(‘simplenews’);
+			if ($moduleExist) {
+			print “simplenews Module Exist”;
+			}
+			else {
+			print “simplenews Module Not Exist”;
+			}
+
+			//Writing your own Access denied
+
+			//Syntax:
+
+			use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+			 
+			function callBackFunction() {
+				// Inside callBackFunction
+				throw new AccessDeniedHttpException();
+			}
+
+			//Page Redirection with Sample code.
+
+		/*	In Drupal 8 fully works on OOPs concept. To create page redirection we need to use Symfony components class. The page redirection is done by RedirectResponse Class from Symfony HttpFoundation. This class object used inside function as a return parameter. While creating object we need to send valid site path to the constructor of RedirectResponse class.
+
+            In Drupal 7 we using drupal_goto() function for redirect.*/
+
+			//Syntax:
+
+			use Symfony\Component\HttpFoundation\RedirectResponse;
+			function callBackFunction() {
+				// Inside callBackFunction
+				return new RedirectResponse(“REDIRECT PATH”);
+			}
+
+
+			//Accessing User Roles and Custom User Permissions.
+/*
+			In Drupal 8 we create users permission using YML file of our module. It created as  MODULE.permission.yml. In this yml we specifying machine name, title,description for permission and access right.
+
+*/
+
+
+			  permission_machine_name:
+			  title: 'PERMISSION TITLE'
+			  description: 'PERMISSION DESCRIPTION'
+			  restrict access: true (or) false
+
+			  //List of Roles :
+/*
+				To get list of roles from our Drupal 8 system by calling the function user_role_names(). This function return as Associated array with key as Role machine and value as title of role.
+*/
+				Example:
+
+				$roles_list = user_role_names();
+				print_r($roles_list);
+				// Output.
+				Array
+				(
+				    [anonymous] => Anonymous user
+				    [authenticated] => Authenticated user
+				    [administrator] => Administrator
+				)
+
+
+
+		
 
 	}
 
