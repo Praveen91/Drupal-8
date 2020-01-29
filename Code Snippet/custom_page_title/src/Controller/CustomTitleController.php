@@ -516,6 +516,53 @@ class CustomTitleController {
 				)
 
 
+				//Logging Messages and Errors.
+
+				//Syntax:
+
+				\Drupal::logger(‘MODULE_NAME’’)->notice($message, $valueArray); 
+				\Drupal::logger('Faq_Ask')->notice("Asker notification email sent to @to for question @quest", array('@to' => $email, '@quest' => SafeMarkup::checkPlain($node_title))); 
+
+
+				 \Drupal::logger(‘MODULE_NAME’’)->error($message, $valueArray); 
+
+
+				 //Enabled Languages and Language codes.
+
+/*
+				 In Drupal 8 language related features are handled in core classes. To get list of languages that enabled in your Drupal 8 site using function languageManager.
+*/
+								 
+				// Access all language in site.
+				 
+				$language = \Drupal::languageManager()->getCurrentLanguage();
+				 
+				print_r($language);
+				 
+				 
+				// Get default language and its property.
+				 
+				$defaultLanguage = \Drupal::languageManager()->getCurrentLanguage();
+				 
+				print_r($language);
+				 
+				 
+				// Default language Name.
+				 
+				$langName= \Drupal::languageManager()->getCurrentLanguage()->getName();
+				 
+				print $langName;
+				 
+				 
+				// Default language Code.
+				 
+				$langCode= \Drupal::languageManager()->getCurrentLanguage()->getId();
+				 
+				print $langCode;
+
+
+
+
 
 		
 

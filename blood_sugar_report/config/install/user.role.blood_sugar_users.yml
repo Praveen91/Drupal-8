@@ -1,0 +1,10 @@
+uuid: f887fcf8-e025-4cbd-83cc-6cd7340f1f21
+langcode: en
+status: true
+dependencies: {  }
+id: blood_sugar_users
+label: 'Blood Sugar Users'
+weight: 3
+is_admin: null
+permissions:
+  - 'access all views'
